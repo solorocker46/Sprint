@@ -1,7 +1,7 @@
 package com.cg.nsa.entity;
 
 import java.time.LocalDate;
-
+//Student Class
 public class Student extends User {
 	private int studentId;
 	private String fullName;
