@@ -2,10 +2,12 @@ package com.cg.nsa.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="officer10")
+@PrimaryKeyJoinColumn(name="userId")
 public class Officer extends User 
 {
 	//@Id

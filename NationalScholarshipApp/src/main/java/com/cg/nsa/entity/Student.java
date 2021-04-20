@@ -4,10 +4,12 @@ import java.time.LocalDate;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="student10")
+@PrimaryKeyJoinColumn(name="userId")  
 public class Student extends User 
 {
 	//@Id

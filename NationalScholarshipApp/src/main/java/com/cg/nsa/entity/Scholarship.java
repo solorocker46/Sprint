@@ -28,10 +28,10 @@ public class Scholarship
 	private String appStatus;		// Pending/Approved/Rejected
 	private String approval;		// Pending/Granted
 	@OneToMany(cascade = CascadeType.ALL)
-	@JoinColumn(name = "studentId")
+	@JoinColumn(name = "userId")
 	private List<Student> studentList;
 	@OneToMany(cascade = CascadeType.ALL)
-	@JoinColumn(name = "code")
+	@JoinColumn(name = "userId")
 	private List<Institution> instituteList;
 	
 	public Scholarship(int scholarshipId, String scholarshipName, String field, String course, int courseYear,
@@ -187,8 +187,5 @@ public class Scholarship
 				+ ", accountNo=" + accountNo + ", appStatus=" + appStatus + ", approval=" + approval + ", studentList="
 				+ studentList + ", instituteList=" + instituteList + "]";
 	}
-	
-	
-	
 	
 }
