@@ -1,5 +1,6 @@
 package com.cg.nsa.entity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.PrimaryKeyJoinColumn;
@@ -11,6 +12,7 @@ import javax.persistence.Table;
 public class Ministry extends User 
 {
 	//@Id
+	@Column(name = "portfolio")
 	private String portfolio;
 
 	public Ministry(String userId, String password, String role, String portfolio) {

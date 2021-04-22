@@ -1,5 +1,6 @@
 package com.cg.nsa.entity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.PrimaryKeyJoinColumn;
@@ -11,17 +12,29 @@ import javax.persistence.Table;
 public class Institution extends User
 {
 	//@Id
+	@Column(name = "code")
 	private int code;
+	@Column(name = "category")
 	private String category;	//	Government/Private/Autonomous
+	@Column(name = "type")
 	private String type;		// Medical/Law/Engineering
+	@Column(name = "name")
 	private String name;
+	@Column(name = "university")
 	private String university;		// 	University affiliated with
+	@Column(name = "address")
 	private String address;
+	@Column(name = "city")
 	private String city;
+	@Column(name = "state")
 	private String state;
+	@Column(name = "yearOpen")
 	private int yearOpen;
+	@Column(name = "telephone")
 	private String telephone;
+	@Column(name = "principal")
 	private String principal;
+	@Column(name = "status")
 	private String status;		// Pending/Approved/Rejected
 	
 	public Institution(String userId, String password, String role, int code, String category, String type, String name,

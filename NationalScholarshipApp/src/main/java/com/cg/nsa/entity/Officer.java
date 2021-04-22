@@ -1,5 +1,6 @@
 package com.cg.nsa.entity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.PrimaryKeyJoinColumn;
@@ -11,7 +12,9 @@ import javax.persistence.Table;
 public class Officer extends User 
 {
 	//@Id
+	@Column(name = "name")
 	private String name;
+	@Column(name = "state")
 	private String state;
 	
 	public Officer(String userId, String password, String role, String name, String state) {

@@ -1,5 +1,6 @@
 package com.cg.nsa.entity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
@@ -14,8 +15,11 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 public class User 
 {
 	@Id
+	@Column(name = "userId")
 	private String userId;
+	@Column(name = "password")
 	private String password;
+	@Column(name = "role")
 	private String role;
 	
 	public User(String userId, String password, String role) {

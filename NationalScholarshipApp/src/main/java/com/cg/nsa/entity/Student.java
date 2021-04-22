@@ -2,6 +2,7 @@ package com.cg.nsa.entity;
 
 import java.time.LocalDate;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.PrimaryKeyJoinColumn;
@@ -13,14 +14,23 @@ import javax.persistence.Table;
 public class Student extends User 
 {
 	//@Id
+	@Column(name = "studentId")
 	private int studentId;
+	@Column(name = "fullName")
 	private String fullName;
+	@Column(name = "birthdate")
 	private LocalDate birthdate;
+	@Column(name = "gender")
 	private String gender;
+	@Column(name = "mobile")
 	private String mobile;
+	@Column(name = "email")
 	private String email;
+	@Column(name = "address")
 	private String address;
+	@Column(name = "city")
 	private String city;
+	@Column(name = "aadhar")
 	private String aadhar;
 	
 	public Student(String userId, String password, String role, int studentId, String fullName, LocalDate birthdate,
