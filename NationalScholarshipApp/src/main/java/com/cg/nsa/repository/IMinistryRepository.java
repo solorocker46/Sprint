@@ -6,9 +6,15 @@ import org.springframework.stereotype.Repository;
 import com.cg.nsa.entity.Ministry;
 import com.cg.nsa.entity.Scholarship;
 
+/**
+ * Description Ministry Repository
+ * @author VASUPPRADHA
+ *
+ */
+
 @Repository
-public interface IMinistryRepository extends JpaRepository<Ministry, Integer>
+public interface IMinistryRepository extends JpaRepository<Ministry, String>
 {
 	
-	//Scholarship grant(Scholarship scholarship);
+	
 }

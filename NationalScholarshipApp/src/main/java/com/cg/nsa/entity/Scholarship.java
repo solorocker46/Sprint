@@ -9,6 +9,10 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.Range;
 
 @Entity
 @Table(name="scholarship10")
@@ -17,60 +21,42 @@ public class Scholarship
 	@Id
 	@Column(name = "scholarshipId")
 	private int scholarshipId;
+	
+	@NotEmpty(message="Scholarship Name cannot be empty ")
 	@Column(name = "scholarshipName")
 	private String scholarshipName;		//Prime Minister Scholarship Scheme/SwarnaJayanti Fellowships Scheme, etc..
-	@Column(name = "field")
-	private String field;		// Medical, Law, Engineering
-	@Column(name = "course")
-	private String course;		// LLB, MBA, MBBS, BE, BTech, MTech, BCA
-	@Column(name = "courseYear")
-	private int courseYear;		// Current course year
-	@Column(name = "sscScore")
-	private double sscScore;
-	@Column(name = "hscScore")
-	private double hscScore;
-	@Column(name = "familyIncome")
-	private double familyIncome;
-	@Column(name = "bankName")
-	private String bankName;
-	@Column(name = "bankIfsc")
-	private String bankIfsc;
-	@Column(name = "accountNo")
-	private String accountNo;
-	@Column(name = "appStatus")
-	private String appStatus;		// Pending/Approved/Rejected
-	@Column(name = "approval")
-	private String approval;		// Pending/Granted
+	
+	@Column(name = "sscScoreCriteria")
+	@Range(min = (long) 0.0,max = (long) 100.0, message = "Ssc score should be between 0 and 100")
+	private double sscScoreCriteria;
+	
+	@Column(name = "hscScoreCriteria")
+	@Range(min = (long) 0.0,max = (long) 100.0, message = "Hsc score should be between 0 and 100")
+	private double hscScoreCriteria;
+	
+	@Column(name = "familyIncomeCriteria")
+	private double familyIncomeCriteria;
+	
 	@OneToMany(cascade = CascadeType.ALL)
-	@JoinColumn(name = "userId")
+	@JoinColumn(name = "scholarshipId")
 	private List<Student> studentList;
+	
 	@OneToMany(cascade = CascadeType.ALL)
-	@JoinColumn(name = "userId")
+	@JoinColumn(name = "scholarshipId")
 	private List<Institution> instituteList;
 	
-	public Scholarship(int scholarshipId, String scholarshipName, String field, String course, int courseYear,
-			double sscScore, double hscScore, double familyIncome, String bankName, String bankIfsc, String accountNo,
-			String appStatus, String approval, List<Student> studentList, List<Institution> instituteList) {
+	public Scholarship() {
+		// TODO Auto-generated constructor stub
+	}
+
+	public Scholarship(int scholarshipId, String scholarshipName, double sscScoreCriteria, double hscScoreCriteria,
+			double familyIncomeCriteria) {
 		super();
 		this.scholarshipId = scholarshipId;
 		this.scholarshipName = scholarshipName;
-		this.field = field;
-		this.course = course;
-		this.courseYear = courseYear;
-		this.sscScore = sscScore;
-		this.hscScore = hscScore;
-		this.familyIncome = familyIncome;
-		this.bankName = bankName;
-		this.bankIfsc = bankIfsc;
-		this.accountNo = accountNo;
-		this.appStatus = appStatus;
-		this.approval = approval;
-		this.studentList = studentList;
-		this.instituteList = instituteList;
-	}
-
-	public Scholarship() {
-		super();
+		this.sscScoreCriteria = sscScoreCriteria;
+		this.hscScoreCriteria = hscScoreCriteria;
+		this.familyIncomeCriteria = familyIncomeCriteria;
 	}
 
 	public int getScholarshipId() {
@@ -89,117 +75,111 @@ public class Scholarship
 		this.scholarshipName = scholarshipName;
 	}
 
-	public String getField() {
-		return field;
+	public double getSscScoreCriteria() {
+		return sscScoreCriteria;
 	}
 
-	public void setField(String field) {
-		this.field = field;
+	public void setSscScoreCriteria(double sscScoreCriteria) {
+		this.sscScoreCriteria = sscScoreCriteria;
 	}
 
-	public String getCourse() {
-		return course;
+	public double getHscScoreCriteria() {
+		return hscScoreCriteria;
 	}
 
-	public void setCourse(String course) {
-		this.course = course;
+	public void setHscScoreCriteria(double hscScoreCriteria) {
+		this.hscScoreCriteria = hscScoreCriteria;
 	}
 
-	public int getCourseYear() {
-		return courseYear;
+	public double getFamilyIncomeCriteria() {
+		return familyIncomeCriteria;
 	}
 
-	public void setCourseYear(int courseYear) {
-		this.courseYear = courseYear;
+	public void setFamilyIncomeCriteria(double familyIncomeCriteria) {
+		this.familyIncomeCriteria = familyIncomeCriteria;
 	}
 
-	public double getSscScore() {
-		return sscScore;
-	}
-
-	public void setSscScore(double sscScore) {
-		this.sscScore = sscScore;
-	}
-
-	public double getHscScore() {
-		return hscScore;
-	}
-
-	public void setHscScore(double hscScore) {
-		this.hscScore = hscScore;
-	}
-
-	public double getFamilyIncome() {
-		return familyIncome;
-	}
-
-	public void setFamilyIncome(double familyIncome) {
-		this.familyIncome = familyIncome;
-	}
-
-	public String getBankName() {
-		return bankName;
-	}
-
-	public void setBankName(String bankName) {
-		this.bankName = bankName;
-	}
-
-	public String getBankIfsc() {
-		return bankIfsc;
-	}
-
-	public void setBankIfsc(String bankIfsc) {
-		this.bankIfsc = bankIfsc;
-	}
-
-	public String getAccountNo() {
-		return accountNo;
-	}
-
-	public void setAccountNo(String accountNo) {
-		this.accountNo = accountNo;
-	}
-
-	public String getAppStatus() {
-		return appStatus;
-	}
-
-	public void setAppStatus(String appStatus) {
-		this.appStatus = appStatus;
-	}
-
-	public String getApproval() {
-		return approval;
-	}
-
-	public void setApproval(String approval) {
-		this.approval = approval;
-	}
-
-	public List<Student> getStudentList() {
+	public List<Student> findStudentList() {
 		return studentList;
 	}
 
-	public void setStudentList(List<Student> studentList) {
+	public void updateStudentList(List<Student> studentList) {
 		this.studentList = studentList;
 	}
 
-	public List<Institution> getInstituteList() {
+	public List<Institution> findInstituteList() {
 		return instituteList;
 	}
 
-	public void setInstituteList(List<Institution> instituteList) {
+	public void updateInstituteList(List<Institution> instituteList) {
 		this.instituteList = instituteList;
 	}
 
 	@Override
 	public String toString() {
-		return "Scholarship [scholarshipId=" + scholarshipId + ", scholarshipName=" + scholarshipName + ", field="
-				+ field + ", course=" + course + ", courseYear=" + courseYear + ", sscScore=" + sscScore + ", hscScore="
-				+ hscScore + ", familyIncome=" + familyIncome + ", bankName=" + bankName + ", bankIfsc=" + bankIfsc
-				+ ", accountNo=" + accountNo + ", appStatus=" + appStatus + ", approval=" + approval + ", studentList="
-				+ studentList + ", instituteList=" + instituteList + "]";
+		return "Scholarship [scholarshipId=" + scholarshipId + ", scholarshipName=" + scholarshipName
+				+ ", sscScoreCriteria=" + sscScoreCriteria + ", hscScoreCriteria=" + hscScoreCriteria
+				+ ", familyIncomeCriteria=" + familyIncomeCriteria + ", studentList=" + studentList + ", instituteList="
+				+ instituteList + "]";
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		long temp;
+		temp = Double.doubleToLongBits(familyIncomeCriteria);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		temp = Double.doubleToLongBits(hscScoreCriteria);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		result = prime * result + ((instituteList == null) ? 0 : instituteList.hashCode());
+		result = prime * result + scholarshipId;
+		result = prime * result + ((scholarshipName == null) ? 0 : scholarshipName.hashCode());
+		temp = Double.doubleToLongBits(sscScoreCriteria);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		result = prime * result + ((studentList == null) ? 0 : studentList.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Scholarship other = (Scholarship) obj;
+		if (Double.doubleToLongBits(familyIncomeCriteria) != Double.doubleToLongBits(other.familyIncomeCriteria))
+			return false;
+		if (Double.doubleToLongBits(hscScoreCriteria) != Double.doubleToLongBits(other.hscScoreCriteria))
+			return false;
+		if (instituteList == null) {
+			if (other.instituteList != null)
+				return false;
+		} else if (!instituteList.equals(other.instituteList))
+			return false;
+		if (scholarshipId != other.scholarshipId)
+			return false;
+		if (scholarshipName == null) {
+			if (other.scholarshipName != null)
+				return false;
+		} else if (!scholarshipName.equals(other.scholarshipName))
+			return false;
+		if (Double.doubleToLongBits(sscScoreCriteria) != Double.doubleToLongBits(other.sscScoreCriteria))
+			return false;
+		if (studentList == null) {
+			if (other.studentList != null)
+				return false;
+		} else if (!studentList.equals(other.studentList))
+			return false;
+		return true;
+	}
+
+	
+	
+	
+	
+	
 	
 }

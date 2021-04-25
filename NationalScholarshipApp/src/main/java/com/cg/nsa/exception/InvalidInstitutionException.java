@@ -1,6 +1,6 @@
 package com.cg.nsa.exception;
 
-public class InvalidInstitutionException extends Exception {
+public class InvalidInstitutionException extends RuntimeException {
 
 	public InvalidInstitutionException() {
 		// TODO Auto-generated constructor stub

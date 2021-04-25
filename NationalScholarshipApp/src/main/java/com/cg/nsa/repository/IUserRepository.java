@@ -1,3 +1,12 @@
+/********************************************************
+ 
+ * @author Rajkumar V
+ * version: 1.0
+ * Description: This is the Repository Class.
+ * Created date: 22-04-2021
+ 
+ * ******************************************************
+ */
 package com.cg.nsa.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -6,12 +15,12 @@ import org.springframework.stereotype.Repository;
 
 import com.cg.nsa.entity.User;
 
+
 @Repository
-//@EnableJpaRepositories
-public interface IUserRepository extends JpaRepository<User, Integer>
+public interface IUserRepository extends JpaRepository<User, String>
 {
 
-	//User login(User user);
 	
-    //	User logout(User user);
+	 User findByUserId(String user);
+		
 }
