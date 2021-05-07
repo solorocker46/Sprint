@@ -1,36 +1,61 @@
 package com.cg.nsa.entity;
 
 import javax.persistence.Entity;
-import javax.persistence.Id;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
-/**
- * Description Entity class for ministry
- * @author VASUSAI
+/****************************************************************************************************************
+ * 
+ * @author VASUPRADHA S
+ * Version 1.0
+ * Description: Entity class for ministry
+ * Created Date: 19-04-2021
  *
- */
+ ****************************************************************************************************************/
 @Entity
 @Table(name="ministry10")
 @PrimaryKeyJoinColumn(name="userId")
 public class Ministry extends User 
 {
-	//@Id
 	@NotBlank(message="portfolio cannot be empty") //Validation
 	private String portfolio;
+	
+	/*************************************************************
+	 * 
+	 * Description: Parameterized Constructor for minister entity
+	 * 
+	 *************************************************************/
 
 	public Ministry(String userId, String password, String role, String portfolio) {
 		super(userId, password, role);
 		this.portfolio = portfolio;
 	}
+	
+	/************************************************************
+	 * 
+	 * Description: Parameterized Constructor for user entity
+	 * 
+	 ************************************************************/
 
 	public Ministry(String userId, String password, String role) {
 		super(userId, password, role);
 	}
+	
+	/*******************************************
+	 * 
+	 * Description: Default Constructor
+	 * 
+	 *******************************************/
 
 	public Ministry() {
 		super();
 	}
+	
+	/**********************************************
+	 * 
+	 * Description: Getters and Setters
+	 * 
+	 ***********************************************/
 	
 	public String getPortfolio() {
 		return portfolio;
@@ -39,11 +64,23 @@ public class Ministry extends User
 	public void setPortfolio(String portfolio) {
 		this.portfolio = portfolio;
 	}
+	
+	/**********************************************
+	 * 
+	 * Description: To String Method
+	 * 
+	 ***********************************************/
 
 	@Override
 	public String toString() {
 		return "Ministry [portfolio=" + portfolio + "]";
 	}
+	
+	/**********************************************
+	 * 
+	 * Description: Hash code and equals
+	 * 
+	 ***********************************************/
 
 	@Override
 	public int hashCode() {
@@ -69,7 +106,4 @@ public class Ministry extends User
 			return false;
 		return true;
 	}
-
-	
-	
 }

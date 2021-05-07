@@ -16,7 +16,7 @@ import com.cg.nsa.entity.User;
 @Service
 public interface IUserService {
 
-	User login(User user); //throws InvalidCredentialsException
+	User login(User user); 
 	
 	User logout(User user);
 }

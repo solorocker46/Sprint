@@ -1,12 +1,3 @@
-/********************************************************
- * 
- * @author Rajkumar V
- * version: 1.0
- * Description: This is the User Controller class
- * Created date: 23-04-2021
- * 
- * ******************************************************/
-
 package com.cg.nsa.controller;
 import javax.validation.Valid;
 import java.util.List;
@@ -24,18 +15,29 @@ import com.cg.nsa.entity.User;
 import com.cg.nsa.exception.InvalidCredentialsException;
 import com.cg.nsa.exception.ValidationException;
 import com.cg.nsa.service.IUserService;
+
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+
 import org.springframework.validation.BindingResult;
 
+/********************************************************
+ * 
+ * @author Rajkumar V
+ * version: 1.0
+ * Description: This is the User Controller class
+ * Created date: 23-04-2021
+ * 
+ * ******************************************************/
 
+@Api("User controller")
 @RestController
 @RequestMapping(value ="/User")
-
 public class UserController {
 	
 	@Autowired
-	IUserService service;
+	IUserService iUserService;
 	
-
 	/********************************************************
 	 * 
 	 * @param User 
@@ -44,8 +46,10 @@ public class UserController {
 	 * 
 	 * ******************************************************/
 	
-	@PutMapping(value="/login")
-	public ResponseEntity<String> login(@Valid @RequestBody User user,BindingResult bindingResult){
+	@ApiOperation("Login function")
+	@PutMapping(value = "/login")
+	public ResponseEntity<String> login(@Valid @RequestBody User user, BindingResult bindingResult)
+	{
 		if(bindingResult.hasErrors())
 		{
 			List<FieldError> errors=bindingResult.getFieldErrors();		
@@ -57,15 +61,13 @@ public class UserController {
 			throw new ValidationException(errorList);
 		}
 		try {
-			service.login(user);
-			return new ResponseEntity<String>("logged in", HttpStatus.OK);
+			iUserService.login(user);
+			return new ResponseEntity<>("Logged in", HttpStatus.OK);
 		}
 		catch(InvalidCredentialsException e) {
-			throw new InvalidCredentialsException("login failed");
+			throw new InvalidCredentialsException("Login failed");
 		}
 	}
-
-
 
 	/********************************************************
 	 * 
@@ -74,8 +76,8 @@ public class UserController {
 	 * @return this method returns logout method
 	 * 
 	 * ******************************************************/
-	@PutMapping(value ="/logout")
-	public ResponseEntity<String> logout(@Valid @RequestBody User user,BindingResult bindingResult){
+	@PutMapping(value = "/logout")
+	public ResponseEntity<String> logout(@Valid @RequestBody User user, BindingResult bindingResult){
 		if(bindingResult.hasErrors())
 		{
 			List<FieldError> errors=bindingResult.getFieldErrors();		
@@ -87,11 +89,11 @@ public class UserController {
 			throw new ValidationException(errorList);
 		}
 		try {
-			service.logout(user);
-			return new ResponseEntity<String>( "logged out",HttpStatus.OK);
+			iUserService.logout(user);
+			return new ResponseEntity<>( "Logged out",HttpStatus.OK);
 		}
 		catch(InvalidCredentialsException e){
-			throw new InvalidCredentialsException("logged out failed");
+			throw new InvalidCredentialsException("Logging out failed");
 		}
 	}
 } 

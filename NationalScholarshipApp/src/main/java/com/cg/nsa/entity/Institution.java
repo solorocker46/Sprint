@@ -72,16 +72,20 @@ public class Institution extends User
 	
 	/**********************************
 	 * 
+	 * @author Sushma S
+	 * Created date: 19-04-2021
 	 * This is a no-arg constructor
 	 * 
 	 **********************************/
 
 	public Institution() {
-		// TODO Auto-generated constructor stub
+
 	}
 	
 	/****************************************************
 	 * 
+	 * @author Sushma S
+	 * Created date: 19-04-2021
 	 * @param userId
 	 * @param password
 	 * @param role
@@ -129,230 +133,95 @@ public class Institution extends User
 
 	/*************************************************
 	 * 
-	 * @return this method returns institution code
+	 * Getters / setters
+	 * @author Sushma S
+	 * Created date: 19-04-2021
 	 * 
 	 *************************************************/
 	
 	public int getCode() {
 		return code;
 	}
-
-	/*****************************************
-	 * 
-	 * @param code
-	 * This method sets institution code
-	 * 
-	 ******************************************/
 	
 	public void setCode(int code) {
 		this.code = code;
 	}
-
-	/*****************************************************
-	 * 
-	 * @return this method returns institution category
-	 * 
-	 *****************************************************/
 	
 	public String getCategory() {
 		return category;
 	}
 	
-	/*****************************************
-	 * 
-	 * @param category
-	 * This method sets institution category
-	 * 
-	 ******************************************/
-
 	public void setCategory(String category) {
 		this.category = category;
 	}
-
-	/*************************************************
-	 * 
-	 * @return this method returns institution type
-	 * 
-	 *************************************************/
 	
 	public String getType() {
 		return type;
 	}
-	
-	/*****************************************
-	 * 
-	 * @param type
-	 * This method sets institution type
-	 * 
-	 ******************************************/
 
 	public void setType(String type) {
 		this.type = type;
 	}
-
-	/*************************************************
-	 * 
-	 * @return this method returns institution name
-	 * 
-	 *************************************************/
 	
 	public String getName() {
 		return name;
 	}
-	
-	/*****************************************
-	 * 
-	 * @param name
-	 * This method sets institution name
-	 * 
-	 ******************************************/
 
 	public void setName(String name) {
 		this.name = name;
 	}
-
-	/****************************************************************************************
-	 * 
-	 * @return this method returns the university with which the institution is affiliated 
-	 * 
-	 ****************************************************************************************/
 	
 	public String getUniversity() {
 		return university;
 	}
-
-	/*******************************************************************************
-	 * 
-	 * @param university
-	 * This method sets the university with which the institution is affiliated
-	 * 
-	 *******************************************************************************/
 	
 	public void setUniversity(String university) {
 		this.university = university;
 	}
-
-	/*************************************************
-	 * 
-	 * @return this method returns institution address
-	 * 
-	 *************************************************/
 	
 	public String getAddress() {
 		return address;
 	}
-	
-	/*****************************************
-	 * 
-	 * @param address
-	 * This method sets institution address
-	 * 
-	 ******************************************/
 
 	public void setAddress(String address) {
 		this.address = address;
 	}
-
-	/*************************************************
-	 * 
-	 * @return this method returns institution city
-	 * 
-	 *************************************************/
 	
 	public String getCity() {
 		return city;
 	}
-	
-	/*****************************************
-	 * 
-	 * @param city
-	 * This method sets institution city
-	 * 
-	 ******************************************/
 
 	public void setCity(String city) {
 		this.city = city;
 	}
 
-	/*************************************************
-	 * 
-	 * @return this method returns institution state
-	 * 
-	 *************************************************/
-	
 	public String getState() {
 		return state;
 	}
-	
-	/*****************************************
-	 * 
-	 * @param state
-	 * This method sets institution state
-	 * 
-	 ******************************************/
 
 	public void setState(String state) {
 		this.state = state;
 	}
 
-	/***********************************************************
-	 * 
-	 * @return this method returns institution's year of open
-	 * 
-	 ***********************************************************/
-	
 	public int getYearOpen() {
 		return yearOpen;
 	}
-	
-	/*****************************************
-	 * 
-	 * @param yearOpen
-	 * This method sets institution's year of open
-	 * 
-	 ******************************************/
 
 	public void setYearOpen(int yearOpen) {
 		this.yearOpen = yearOpen;
 	}
-
-	/****************************************************************
-	 * 
-	 * @return this method returns institution's telephone number
-	 * 
-	 ****************************************************************/
 	
 	public String getTelephone() {
 		return telephone;
 	}
-	
-	/***************************************************
-	 * 
-	 * @param telephone
-	 * This method sets institution telephone number
-	 * 
-	 ****************************************************/
 
 	public void setTelephone(String telephone) {
 		this.telephone = telephone;
 	}
-
-	/*****************************************************************
-	 * 
-	 * @return this method returns institution's principal's name
-	 * 
-	 *****************************************************************/
 	
 	public String getPrincipal() {
 		return principal;
 	}
-	
-	/*****************************************************
-	 * 
-	 * @param principal
-	 * This method sets institution's principal's name
-	 * 
-	 *****************************************************/
 
 	public void setPrincipal(String principal) {
 		this.principal = principal;
@@ -360,6 +229,8 @@ public class Institution extends User
 
 	/*************************************************
 	 * 
+	 * @author Sushma S
+	 * Created date: 19-04-2021
 	 * @return this method returns institution status
 	 * 
 	 *************************************************/
@@ -370,6 +241,8 @@ public class Institution extends User
 	
 	/*****************************************
 	 * 
+	 * @author Sushma S
+	 * Created date: 19-04-2021
 	 * @param status
 	 * This method sets institution status
 	 * 
@@ -381,6 +254,8 @@ public class Institution extends User
 
 	/*******************************
 	 * 
+	 * @author Sushma S
+	 * Created date: 19-04-2021
 	 * This is toString() method
 	 * 
 	 *******************************/
@@ -395,6 +270,8 @@ public class Institution extends User
 
 	/*******************************
 	 * 
+	 * @author Sushma S
+	 * Created date: 19-04-2021
 	 * This is hashcode() method
 	 * 
 	 *******************************/
@@ -420,6 +297,8 @@ public class Institution extends User
 
 	/*******************************
 	 * 
+	 * @author Sushma S
+	 * Created date: 19-04-2021
 	 * This is equals() method
 	 * 
 	 ******************************/

@@ -1,11 +1,3 @@
-/********************************************************
- * 
- * @author Rajkumar V
- * version: 1.0
- * Description: This is the user entity class 
- * Created date: 20-04-2021
- * 
- * ******************************************************/
 package com.cg.nsa.entity;
 
 import javax.persistence.Column;
@@ -15,6 +7,15 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
+
+/********************************************************
+ * 
+ * @author Rajkumar V
+ * version: 1.0
+ * Description: This is the user entity class 
+ * Created date: 20-04-2021
+ * 
+ * ******************************************************/
 
 @Entity
 @Table(name="user10")
@@ -36,6 +37,14 @@ public class User
 	
 	private int loggedin;
 	
+	/********************************
+	 * 
+	 * @param userId
+	 * @param password
+	 * @param role
+	 * 
+	 ********************************/
+	
 	public User(String userId, String password, String role) {
 		super();
 		this.userId = userId;
@@ -44,6 +53,14 @@ public class User
 		this.loggedin=0;
 	}
 
+	/**********************************
+	 * 
+	 * @author Rajkumar V
+	 * Created date: 20-04-2021
+	 * This is a no-arg constructor
+	 * 
+	 **********************************/
+	
 	public User() {
 		super();
 	}
@@ -72,22 +89,22 @@ public class User
 		this.role = role;
 	}
 	
-	
 	public int login()
 	{
 		return this.loggedin=1;
-		}
+	}
 	
-     public int isLogin()
-     {
+    public int isLogin()
+    {
     	 return this.loggedin;
     	 
-     }
-     public void logout()
+    }
+    public void logout()
  	{
  		this.loggedin=0;
  	}
-     
+    
+    @Override
 	public String toString() {
 		return "User [userId=" + userId + ", password=" + password + ", role=" + role + "]";
 	}

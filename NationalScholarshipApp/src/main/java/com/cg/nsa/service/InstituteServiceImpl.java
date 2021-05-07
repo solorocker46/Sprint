@@ -4,9 +4,11 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.cg.nsa.entity.Institution;
 import com.cg.nsa.exception.InvalidInstitutionException;
+import com.cg.nsa.exception.StateNotFoundException;
 import com.cg.nsa.exception.UniqueElementException;
 import com.cg.nsa.exception.UserIdNotFoundException;
 import com.cg.nsa.repository.IInstituteRepository;
@@ -28,6 +30,8 @@ public class InstituteServiceImpl implements IInstituteService {
 	
 	/**************************************************************************************************************
 	 * 
+	 * @author Sushma S
+	 * Created date: 20-04-2021
 	 * @return this method returns an Institution object after adding an institution's details into the database
 	 * @param this method takes in Institution object parameter
 	 * @throws this method can throw a UniqueElementException
@@ -35,8 +39,8 @@ public class InstituteServiceImpl implements IInstituteService {
 	 **************************************************************************************************************/
 	
 	@Override
+	@Transactional
 	public Institution addInstitute(Institution institute) {
-		// TODO Auto-generated method stub
 		if(iInstituteRepository.findByCode(institute.getCode()) == null && iInstituteRepository.findByUserId(institute.getUserId()) == null)
 		{
 			institute.updateStatus("Pending");
@@ -51,6 +55,8 @@ public class InstituteServiceImpl implements IInstituteService {
 
 	/************************************************************************************************
 	 * 
+	 * @author Sushma S
+	 * Created date: 20-04-2021
 	 * @return this method returns an Institution object after editing existing institution details
 	 * @param this method takes in userId of type String as a parameter
 	 * @param this method takes in Institution object parameter
@@ -59,8 +65,8 @@ public class InstituteServiceImpl implements IInstituteService {
 	 ************************************************************************************************/
 	
 	@Override
+	@Transactional
 	public Institution editInstitute(String userId, Institution institute) {
-		// TODO Auto-generated method stub
 		Institution institution = iInstituteRepository.findByUserId(userId);
 		if(institution == null)
 		{
@@ -77,6 +83,8 @@ public class InstituteServiceImpl implements IInstituteService {
 
 	/*********************************************************************************
 	 * 
+	 * @author Sushma S
+	 * Created date: 20-04-2021
 	 * @return this method returns an Institution object after updating the status
 	 * @param this method takes in institution code of type int as a parameter
 	 * @param this method takes in status of type String as a parameter
@@ -85,8 +93,8 @@ public class InstituteServiceImpl implements IInstituteService {
 	 **********************************************************************************/
 	
 	@Override
+	@Transactional
 	public Institution statusUpdate(int code, String status) {
-		// TODO Auto-generated method stub
 		Institution institution = iInstituteRepository.findByCode(code);
 		if(institution == null)
 		{
@@ -102,6 +110,8 @@ public class InstituteServiceImpl implements IInstituteService {
 
 	/*********************************************************************************************
 	 * 
+	 * @author Sushma S
+	 * Created date: 20-04-2021
 	 * @return this method finds an institution by its code and returns that institution object 
 	 * @param this method takes in institution code of type int as a parameter
 	 * @throws this method can throw an InvalidInstitutionException
@@ -109,8 +119,8 @@ public class InstituteServiceImpl implements IInstituteService {
 	 **********************************************************************************************/
 	
 	@Override
+	@Transactional
 	public Institution getInstitute(int code) {
-		// TODO Auto-generated method stub
 		Institution institute = iInstituteRepository.findByCode(code);
 		if(institute == null)
 		{
@@ -125,27 +135,39 @@ public class InstituteServiceImpl implements IInstituteService {
 
 	/***************************************************************
 	 * 
+	 * @author Sushma S
+	 * Created date: 20-04-2021
 	 * @return this method returns a list of Institution objects
 	 * 
 	 ***************************************************************/
 	
 	@Override
+	@Transactional
 	public List<Institution> getAllInstitutes() {
-		// TODO Auto-generated method stub
 		return iInstituteRepository.findAll();
 	}
 
 	/***********************************************************************************************
 	 * 
+	 * @author Sushma S
+	 * Created date: 20-04-2021
 	 * @return this method returns a list of Institution objects belonging to a particular state
 	 * @param this method takes in state of type String as a parameter
 	 * 
 	 ***********************************************************************************************/
 	
 	@Override
+	@Transactional
 	public List<Institution> getInstitutesByState(String state) {
-		// TODO Auto-generated method stub
-		return iInstituteRepository.findByState(state);
+		List<Institution> institutionList = iInstituteRepository.findByState(state);
+		if(institutionList.isEmpty())
+		{
+			throw new StateNotFoundException();
+		}
+		else
+		{
+			return institutionList;
+		}
 	}
 
 }

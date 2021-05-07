@@ -18,14 +18,14 @@ import org.hibernate.validator.constraints.Range;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-/****************************************************************************
+/*******************************************************************************************************************
  * 
  * @author Sneha.M.J
  * Version: 1.0
  * Description: This is the Student Entity Class
- * Created date: 20-04-2021
+ * Created date: 19-04-2021
  * 
- ****************************************************************************/
+ ******************************************************************************************************************/
 
 @Entity
 @Table(name="student10")
@@ -120,6 +120,33 @@ public class Student extends User
 
 	
 		
+	/*******************************************************************************************************************
+	 * 
+	 * Parameterized Constructor 
+	 * 
+	 * @param userId
+	 * @param password
+	 * @param role
+	 * @param studentId
+	 * @param fullName
+	 * @param birthdate
+	 * @param gender
+	 * @param mobile
+	 * @param email
+	 * @param address
+	 * @param city
+	 * @param aadhar
+	 * @param field
+	 * @param course
+	 * @param courseYear
+	 * @param sscScore
+	 * @param hscScore
+	 * @param familyIncome
+	 * @param bankName
+	 * @param bankIfsc
+	 * @param accountNo
+	 * 
+	 ********************************************************************************************************************/
 	public Student(String userId, String password, String role, @Range(min = 1, max = 200) int studentId,
 			@NotEmpty(message = "Full Name cannot be empty") String fullName, @Past LocalDate birthdate,
 			@NotEmpty(message = "Gender cannot be empty") String gender,
@@ -155,13 +182,25 @@ public class Student extends User
 		super(userId, password, role);
 	}
 
+	
+	
+	/*******************************************************************************************************************
+	 * 
+	 * Non Parameterized Constructor 
+	 * 
+	 *******************************************************************************************************************/
 	public Student() 
 	{
-		// TODO Auto-generated constructor stub
+		
 	}
 	
 	
-
+	
+	/********************************************************************************************************************
+	 * 
+	 * Getters and Setters
+	 * 
+	 ********************************************************************************************************************/
 	public int getStudentId() {
 		return studentId;
 	}
@@ -333,6 +372,11 @@ public class Student extends User
 
 
 
+	/********************************************************************************************************************
+	 * 
+	 * toString() method
+	 *
+	 ********************************************************************************************************************/
 	@Override
 	public String toString() {
 		return "Student [studentId=" + studentId + ", fullName=" + fullName + ", birthdate=" + birthdate + ", gender="
@@ -345,6 +389,11 @@ public class Student extends User
 
 
 
+	/********************************************************************************************************************
+	 * 
+	 * hashCode() method
+	 *
+	 ********************************************************************************************************************/
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -379,6 +428,11 @@ public class Student extends User
 
 
 
+	/*********************************************************************************************************************
+	 * 
+	 * equals() method
+	 *
+	 ********************************************************************************************************************/
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)

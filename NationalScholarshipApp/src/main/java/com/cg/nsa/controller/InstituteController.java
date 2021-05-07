@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.cg.nsa.entity.Institution;
 import com.cg.nsa.exception.InvalidInstitutionException;
+import com.cg.nsa.exception.StateNotFoundException;
 import com.cg.nsa.exception.UniqueElementException;
 import com.cg.nsa.exception.UserIdNotFoundException;
 import com.cg.nsa.exception.ValidationException;
@@ -47,6 +48,8 @@ public class InstituteController {
 	
 	/***************************************************************************************
 	 * 
+	 * @author Sushma S
+	 * Created date: 20-04-2021
 	 * @param institution
 	 * @param bindingResult
 	 * @return this method returns a new ResponseEntity with an appropriate response code
@@ -62,7 +65,7 @@ public class InstituteController {
 		if(bindingResult.hasErrors())
 		{
 			List<FieldError> errors = bindingResult.getFieldErrors();
-			List<String> errorList = new ArrayList<String>();
+			List<String> errorList = new ArrayList<>();
 			for(FieldError error : errors)
 			{
 				errorList.add(error.getDefaultMessage());
@@ -72,9 +75,9 @@ public class InstituteController {
 		try
 		{
 			iInstituteService.addInstitute(institution);
-			return new ResponseEntity<Object>("Added successfully", HttpStatus.OK);
+			return new ResponseEntity<>("Added successfully", HttpStatus.OK);
 		}
-		catch(UniqueElementException exception)
+		catch(UniqueElementException uniqueElementException)
 		{
 			throw new UniqueElementException("The above institution code / user id already exists");
 		}
@@ -82,6 +85,8 @@ public class InstituteController {
 	
 	/**********************************************************************
 	 * 
+	 * @author Sushma S
+	 * Created date: 20-04-2021
 	 * @return this method returns a list of objects of type Institution
 	 * 
 	 **********************************************************************/
@@ -94,6 +99,9 @@ public class InstituteController {
 	}
 	
 	/**********************************************************************************
+	 * 
+	 * @author Sushma S
+	 * Created date: 20-04-2021
 	 * @param Institution code
 	 * @return this method returns an Institution object given its institution code
 	 * @throws this method throws InvalidInstitutionException
@@ -109,7 +117,7 @@ public class InstituteController {
 		{
 			return iInstituteService.getInstitute(code);
 		}
-		catch(InvalidInstitutionException exception)
+		catch(InvalidInstitutionException invalidInstitutionException)
 		{
 			throw new InvalidInstitutionException("The above code doesn't exist");
 		}
@@ -117,6 +125,8 @@ public class InstituteController {
 	
 	/*******************************************************************************************
 	 * 
+	 * @author Sushma S
+	 * Created date: 20-04-2021
 	 * @param state
 	 * @return this method returns a list of objects of type Institution based on their state
 	 * 
@@ -125,11 +135,20 @@ public class InstituteController {
 	@GetMapping("/getInstituteByState/{state}")
 	public List<Institution> getInstituteByState(@PathVariable String state)
 	{
-		return iInstituteService.getInstitutesByState(state);
+		try
+		{
+			return iInstituteService.getInstitutesByState(state);
+		}
+		catch(StateNotFoundException stateNotFoundException)
+		{
+			throw new StateNotFoundException("No institutions from "+state+" have registered");
+		}
 	}
 	
 	/***************************************************************************************
 	 * 
+	 * @author Sushma S
+	 * Created date: 20-04-2021
 	 * @param userId
 	 * @param Institution object
 	 * @param BindingResult
@@ -145,7 +164,7 @@ public class InstituteController {
 		if(bindingResult.hasErrors())
 		{
 			List<FieldError> errors = bindingResult.getFieldErrors();
-			List<String> errorList = new ArrayList<String>();
+			List<String> errorList = new ArrayList<>();
 			for(FieldError error : errors)
 			{
 				errorList.add(error.getDefaultMessage());
@@ -155,9 +174,9 @@ public class InstituteController {
 		try
 		{
 			iInstituteService.editInstitute(userId, institution);
-			return new ResponseEntity<Object>("Edited details successfully", HttpStatus.OK);
+			return new ResponseEntity<>("Edited details successfully", HttpStatus.OK);
 		}
-		catch(UserIdNotFoundException exception)
+		catch(UserIdNotFoundException userIdNotFoundException)
 		{
 			throw new UserIdNotFoundException("Entered User Id does not exist");
 		}
@@ -165,6 +184,8 @@ public class InstituteController {
 	
 	/****************************************************************************************
 	 * 
+	 * @author Sushma S
+	 * Created date: 20-04-2021
 	 * @param institution code
 	 * @param status
 	 * @return this method returns a new ResponseEntity with an appropriate response code
@@ -179,9 +200,9 @@ public class InstituteController {
 		try
 		{
 			iInstituteService.statusUpdate(code, status);
-			return new ResponseEntity<Object>("Updated successfully", HttpStatus.OK);
+			return new ResponseEntity<>("Updated successfully", HttpStatus.OK);
 		}
-		catch(InvalidInstitutionException exception)
+		catch(InvalidInstitutionException invalidInstitutionException)
 		{
 			throw new InvalidInstitutionException("Entered institution code does not exist");
 		}

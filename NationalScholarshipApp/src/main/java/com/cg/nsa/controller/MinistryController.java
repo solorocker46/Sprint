@@ -30,70 +30,98 @@ import com.cg.nsa.service.IStudentService;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+
+/*************************************************************************************
+ * 
+ * @author VASUPRADHA
+ * Version 1.0
+ * Description Ministry Controller
+ * Created Date: 22-04-2021
+ *
+ *************************************************************************************/
+
 @RestController
 @Api(value="Ministry Api")
 @RequestMapping(value="/MinistryApi")
-/************************************************************************************
- * Description Ministry Controller
- * @author VASUPRADHA 
- *
- *************************************************************************************/
-public class MinistryController{
+public class MinistryController
+{
 	@Autowired
-	IMinistryService ministryService;
+	IMinistryService iMinistryService;
 	@Autowired
-	IScholarshipService scholarshipService;
+	IScholarshipService iScholarshipService;
 	@Autowired
-	IStudentService studentService;
-	/**********************************************************************************
-	 * Description Check whether the given scholarship is granted
+	IStudentService iStudentService;
+	
+	/***********************************************************************************
+	 * 
+	 * @author VASUPRADHA
+	 * Description: Check whether the given scholarship is granted
 	 * @param studentId
 	 * @return string 
+	 * @throws IdNotFoundException
+	 * 
 	 ************************************************************************************/
 	@ApiOperation(value="Grant Scholarship")
 	@PostMapping(value="/grantScholarship/{studentId}")
 	public String grant(@PathVariable int studentId) {
-		Student student=studentService.findByStudentId(studentId);
-
-		for(Scholarship s:scholarshipService.getAllScholarships()) {
-			List<Student> stdList=s.findStudentList();
-			for(Student std:stdList) {
-			//if(stdList.contains(student.getStudentId()))
-				if(std.getStudentId()==studentId){
-				Scholarship scholarship=scholarshipService.getById(s.getScholarshipId()).orElse(null);
-				Scholarship grant_Scholarship=ministryService.grant(scholarship,student);
-				if(grant_Scholarship!=null) {
-					String str="Scholarship is Granted "+"Student Id: "+ student.getStudentId()+" Student Name: "+student.getFullName()+" Scholarship Id: "+scholarship.getScholarshipId()+"  Scholarship Name: "+scholarship.getScholarshipName() +" Scholarship Status: " +student.findAppStatus();
-					return str;
-				}
-				else {
-					String str="Scholarship is Not Granted"+"Student Id: "+ student.getStudentId()+" Student Name: "+student.getFullName()+"  Scholarship Id: "+scholarship.getScholarshipId()+"  Scholarship Name: "+scholarship.getScholarshipName()+" Scholarship Status: " +student.findAppStatus();
-					return str;
-				}
-			}
-			}
 		
+		try{
+			Student student=iStudentService.findByStudentId(studentId);
+			for(Scholarship s:iScholarshipService.getAllScholarships()) {
+				List<Student> stdList=s.findStudentList();
+				for(Student std:stdList) {
+					if(std.getStudentId()==studentId) {
+						Scholarship scholarship=iScholarshipService.getById(s.getScholarshipId()).orElse(null);
+						Scholarship grant_Scholarship=iMinistryService.grant(scholarship,student);
+						if(grant_Scholarship!=null) {
+							return "Scholarship is Granted for-> "+" Student Id: "+ student.getStudentId()+" Student Name: "+student.getFullName()+" Scholarship Id: "+scholarship.getScholarshipId()+"  Scholarship Name: "+scholarship.getScholarshipName() +" Scholarship Status: " +student.findAppStatus();
+						}
+						else {
+							return "Scholarship is Not Granted for-> "+" Student Id: "+ student.getStudentId()+" Student Name: "+student.getFullName()+"  Scholarship Id: "+scholarship.getScholarshipId()+"  Scholarship Name: "+scholarship.getScholarshipName()+" Scholarship Status: " +student.findAppStatus();
+						}
+					}
+				}
+			
+			}
+			
 		}
-		throw new IdNotFoundException("Student not registered");
-	}
-	/*************************************************************************************************
-	 * Description Get All the Ministry Details from database
-	 * @return All Ministry details
-	 **************************************************************************************************/
-	@ApiOperation(value="Get All Ministry")
-	@GetMapping(value="/getAll")
-	public List<Ministry> getAll(){
-		return ministryService.getAll();
+		catch(IdNotFoundException e) {
+			throw new IdNotFoundException("Student not registered");
+		}
+		
+		return null;	
 		
 	}
 	
-	/***************************************************************************************************
-	 * Description adds a new Ministry entry
+	/*************************************************************************************************
+	 * 
+	 * @author VASUPRADHA
+	 * Description: Get All the Ministry Details from database
+	 * @return All Ministry details
+	 * 
+	 **************************************************************************************************/
+	
+	@ApiOperation(value="Get All Ministry")
+	@GetMapping(value="/getAll")
+	
+	public List<Ministry> getAll(){
+		return iMinistryService.getAll();
+		
+	}
+	
+	/*****************************************************************************************************
+	 * 
+	 * @author VASUPRADHA
+	 * Description: adds a new Ministry entry
 	 * @param ministry object
 	 * @return Response Entity
+	 * @throws Validation Exception
+	 * 
 	 *****************************************************************************************************/
+	
 	@ApiOperation(value="Add New Ministry")
 	@PostMapping(value="/addMinistry")
+	
 	public ResponseEntity<String> addMinitry(@Valid @RequestBody Ministry ministry,BindingResult bindingResult){
 		if(bindingResult.hasErrors()) {
 			List<FieldError> errors=bindingResult.getFieldErrors();
@@ -103,7 +131,7 @@ public class MinistryController{
 			}
 			throw new ValidationException(errorList);
 		}
-		ministryService.addMinistry(ministry);
+		iMinistryService.addMinistry(ministry);
 		return new ResponseEntity<String>("Added Ministry Successfully", HttpStatus.OK);
 	}
 	

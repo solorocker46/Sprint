@@ -2,27 +2,25 @@ package com.cg.nsa.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.Id;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 
-@Entity
-@Table(name="officer10")
-@PrimaryKeyJoinColumn(name="userId")
-
 /*********************************************************************
  * 
  * @author SNEHA V
- * Version 1.0
- * Description this is a controller class
- * created date 22-04-2021
+ * Version: 1.0
+ * Description: This is an officer entity class
+ * created date: 22-04-2021
  *
  *********************************************************************/
 
+
+@Entity
+@Table(name="officer10")
+@PrimaryKeyJoinColumn(name="userId")
 public class Officer extends User 
 {
-	//@Id
 	@Column(name="name")
 	@NotEmpty(message="name should not be empty")
 	private String name;
@@ -30,6 +28,11 @@ public class Officer extends User
 	@Column(name="state")
 	private String state;
 	
+	/******************************************************************
+	* 
+	* these are constructors
+	* 
+	******************************************************************/
 	
 	public Officer(String userId, String password, String role, String name, String state) {
 		super(userId, password, role);
@@ -44,6 +47,12 @@ public class Officer extends User
 	public Officer() {
 		super();
 	}
+	
+	/******************************************************************
+	* 
+	* these are getters and setters
+	* 
+	******************************************************************/
 	
 	public String getName() {
 		return name;
@@ -61,11 +70,23 @@ public class Officer extends User
 		this.state = state;
 	}
 
+	/******************************************************************
+	* 
+	* this is toString method
+	* 
+	******************************************************************/
+	
 	@Override
 	public String toString() {
 		return "Officer [name=" + name + ", state=" + state + "]";
 	}
-
+	
+	/******************************************************************
+	* 
+	* this is hashcode method
+	* 
+	******************************************************************/
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -75,6 +96,12 @@ public class Officer extends User
 		return result;
 	}
 
+	/******************************************************************
+	*  
+	* this is equals method
+	* 
+	******************************************************************/
+	
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)

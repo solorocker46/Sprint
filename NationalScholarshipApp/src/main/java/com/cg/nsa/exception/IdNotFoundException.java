@@ -26,8 +26,8 @@ public class IdNotFoundException extends RuntimeException
 	 * @param msg
 	 * 
 	 **********************************/
-	public IdNotFoundException(String msg)
+	public IdNotFoundException(String message)
 	{
-		super(msg);
+		super(message);
 	}
 }
