@@ -227,6 +227,10 @@ public class Institution extends User
 		this.principal = principal;
 	}
 
+	public String getStatus()
+	{
+		return status;
+	}
 	/*************************************************
 	 * 
 	 * @author Sushma S

@@ -32,4 +32,6 @@ public interface IOfficerService {
 	Scholarship grantApproval(Scholarship scholarship, Student student);
 	
 	Institution statusUpdate(int code, String status);
+	
+	Officer getOfficerByUserId(String userId);
 }

@@ -27,6 +27,8 @@ public interface IInstituteService {
 	
 	Institution getInstitute(int code);
 	
+	Institution getInstituteById(String userId);
+	
 	List<Institution> getAllInstitutes();
 	
 	List<Institution> getInstitutesByState(String state);

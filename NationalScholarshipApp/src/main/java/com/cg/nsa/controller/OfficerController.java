@@ -26,6 +26,7 @@ import com.cg.nsa.exception.IdNotFoundException;
 import com.cg.nsa.exception.InvalidInstitutionException;
 import com.cg.nsa.exception.OfficerExistException;
 import com.cg.nsa.exception.StateNotFoundException;
+import com.cg.nsa.exception.UserIdNotFoundException;
 import com.cg.nsa.exception.ValidationException;
 import com.cg.nsa.service.IOfficerService;
 import com.cg.nsa.service.IScholarshipService;
@@ -203,5 +204,19 @@ public class OfficerController
 		throw  new IdNotFoundException("Student not registerd for scholarship !");
 		
 	}
+	
+	@GetMapping(value = "/getOfficerById/{userId}")
+   	public Officer getOfficerByUserId(@PathVariable String userId) {
+   		
+   	    try {
+   		    return iOfficerService.getOfficerByUserId(userId);
+   	    }
+   	    
+   		catch(UserIdNotFoundException e) {
+   			throw new UserIdNotFoundException("No Officer with this id !");
+   			
+   		}
+   	}
+	
 	
 }

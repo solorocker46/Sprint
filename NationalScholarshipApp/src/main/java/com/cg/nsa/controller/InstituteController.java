@@ -124,6 +124,31 @@ public class InstituteController {
 		}
 	}
 	
+	/**********************************************************************************
+	 * 
+	 * @author Sushma S
+	 * Created date: 20-04-2021
+	 * @param Institution userId
+	 * @return this method returns an Institution object given its institution userId
+	 * @throws this method throws InvalidInstitutionException
+	 * 
+	 **********************************************************************************/
+	
+	@ApiOperation("Get institute by userId")
+	@GetMapping("/getInstituteByUserId/{userId}")
+	public Institution getInstituteByUserId(@PathVariable String userId)
+	{
+		
+		try
+		{
+			return iInstituteService.getInstituteById(userId);
+		}
+		catch(InvalidInstitutionException invalidInstitutionException)
+		{
+			throw new InvalidInstitutionException("The above userId doesn't exist");
+		}
+	}
+	
 	/*******************************************************************************************
 	 * 
 	 * @author Sushma S

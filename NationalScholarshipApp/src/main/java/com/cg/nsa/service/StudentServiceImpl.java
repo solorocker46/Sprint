@@ -1,5 +1,7 @@
 package com.cg.nsa.service;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,6 +55,7 @@ public class StudentServiceImpl implements IStudentService
 		{
 			student.updateAppStatus("Pending");
 			student.updateApproval("Pending");
+			student.setRole("Student");
 		    return iStudentRepository.save(student);
 		}
 		else

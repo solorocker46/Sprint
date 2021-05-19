@@ -32,7 +32,7 @@ public class User
 	private String password;
 	
 	@Column(name="role")
-	@NotEmpty(message="Role cannot be empty")
+	//@NotEmpty(message="Role cannot be empty")
 	private String role;
 	
 	private int loggedin;

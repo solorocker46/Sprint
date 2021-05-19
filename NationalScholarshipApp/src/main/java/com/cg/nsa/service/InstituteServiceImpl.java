@@ -44,6 +44,7 @@ public class InstituteServiceImpl implements IInstituteService {
 		if(iInstituteRepository.findByCode(institute.getCode()) == null && iInstituteRepository.findByUserId(institute.getUserId()) == null)
 		{
 			institute.updateStatus("Pending");
+			institute.setRole("Institution");
 			return iInstituteRepository.save(institute);
 			
 		}
@@ -77,6 +78,7 @@ public class InstituteServiceImpl implements IInstituteService {
 			institution.setUniversity(institute.getUniversity());
 			institution.setTelephone(institute.getTelephone());
 			institution.setPrincipal(institute.getPrincipal());
+			institution.setCategory(institute.getCategory());
 			return iInstituteRepository.save(institution);
 		}
 	}
@@ -167,6 +169,30 @@ public class InstituteServiceImpl implements IInstituteService {
 		else
 		{
 			return institutionList;
+		}
+	}
+
+	/*********************************************************************************************
+	 * 
+	 * @author Sushma S
+	 * Created date: 20-04-2021
+	 * @return this method finds an institution by its userId and returns that institution object 
+	 * @param this method takes in institution userId of type string as a parameter
+	 * @throws this method can throw an InvalidInstitutionException
+	 * 
+	 **********************************************************************************************/
+	
+	@Override
+	@Transactional
+	public Institution getInstituteById(String userId) {
+		Institution institute = iInstituteRepository.findByUserId(userId);
+		if(institute == null)
+		{
+			throw new InvalidInstitutionException();
+		}
+		else
+		{
+			return institute;
 		}
 	}
 

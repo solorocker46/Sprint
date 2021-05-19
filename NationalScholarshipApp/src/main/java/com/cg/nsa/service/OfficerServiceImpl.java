@@ -14,6 +14,7 @@ import com.cg.nsa.exception.IdNotFoundException;
 import com.cg.nsa.exception.InvalidInstitutionException;
 import com.cg.nsa.exception.OfficerExistException;
 import com.cg.nsa.exception.StateNotFoundException;
+import com.cg.nsa.exception.UserIdNotFoundException;
 import com.cg.nsa.repository.IInstituteRepository;
 import com.cg.nsa.repository.IOfficerRepository;
 import com.cg.nsa.repository.IStudentRepository;
@@ -55,6 +56,7 @@ public class OfficerServiceImpl implements IOfficerService{
 	   }
 	
 	   else {
+		officer.setRole("Officer");
         return iOfficerRepository.save(officer);
 	   }
     }
@@ -170,6 +172,19 @@ public class OfficerServiceImpl implements IOfficerService{
 			iStudentRepository.save(student);
 			return null;
 		}
+	}
+	
+	@Override
+    @Transactional
+	public Officer getOfficerByUserId(String userId) {
+		
+	    if(iOfficerRepository.existsById(userId)) {	 
+		    return  iOfficerRepository.getByUserId(userId);
+	    }		
+	
+	    else {		
+		    throw new UserIdNotFoundException();
+        }		 
 	}
 
 }

@@ -42,7 +42,7 @@ public class Student extends User
 	
 	@Column(name = "birthdate")
 	@Past
-    @JsonFormat(pattern = "yyyy-MM-dd")
+    //@JsonFormat(pattern = "yyyy-MM-dd")
 	private LocalDate birthdate;
 	
 	@Column(name = "gender")
@@ -370,7 +370,20 @@ public class Student extends User
 		return institution;
 	}
 
-
+	public String getAppStatus()
+	{
+		return appStatus;
+	}
+	
+	public String getApproval()
+	{
+		return approval;
+	}
+	
+	public Institution getInstitution()
+	{
+		return institution;
+	}
 
 	/********************************************************************************************************************
 	 * 

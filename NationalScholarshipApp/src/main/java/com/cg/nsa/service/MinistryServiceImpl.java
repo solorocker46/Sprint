@@ -95,6 +95,7 @@ public class MinistryServiceImpl implements IMinistryService{
 				}
 			}
 			if(flag==0) {
+				ministry.setRole("Ministry");
 				return iMinistryRepository.save(ministry);
 			}
 			else {
