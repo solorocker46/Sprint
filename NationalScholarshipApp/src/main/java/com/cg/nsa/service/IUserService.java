@@ -18,5 +18,5 @@ public interface IUserService {
 
 	User login(User user); 
 	
-	User logout(User user);
+	User logout(String userId);
 }

@@ -25,4 +25,6 @@ public interface IMinistryService {
 	public List<Ministry> getAll();
 	
 	public Ministry addMinistry(Ministry ministry);
+	
+	Ministry getMinistrybyUserId(String userId);
 }

@@ -10,6 +10,7 @@ import com.cg.nsa.entity.Ministry;
 import com.cg.nsa.entity.Scholarship;
 import com.cg.nsa.exception.IdNotFoundException;
 import com.cg.nsa.exception.UserIdAlreadyFoundException;
+import com.cg.nsa.exception.UserIdNotFoundException;
 import com.cg.nsa.repository.IMinistryRepository;
 import com.cg.nsa.repository.IStudentRepository;
 
@@ -102,5 +103,16 @@ public class MinistryServiceImpl implements IMinistryService{
 				throw new UserIdAlreadyFoundException("UserId Cannot Be Repeated");
 			}
 	 }
+	 
+	 @Override
+		public Ministry getMinistrybyUserId(String userId) {
+			if(iMinistryRepository.existsById(userId)) {
+				return iMinistryRepository.getByUserId(userId);
+			}
+
+			else {		
+			    throw new UserIdNotFoundException();
+	        }	
+		}
 
 }

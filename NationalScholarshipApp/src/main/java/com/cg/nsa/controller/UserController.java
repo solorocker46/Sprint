@@ -79,7 +79,7 @@ public class UserController {
 	 * 
 	 * ******************************************************/
 	@PutMapping(value = "/logout")
-	public ResponseEntity<String> logout(@Valid @RequestBody User user, BindingResult bindingResult){
+	public ResponseEntity<String> logout(@Valid @RequestBody String userId, BindingResult bindingResult){
 		if(bindingResult.hasErrors())
 		{
 			List<FieldError> errors=bindingResult.getFieldErrors();		
@@ -91,7 +91,7 @@ public class UserController {
 			throw new ValidationException(errorList);
 		}
 		try {
-			iUserService.logout(user);
+			iUserService.logout(userId);
 			return new ResponseEntity<>( "Logged out",HttpStatus.OK);
 		}
 		catch(InvalidCredentialsException e){

@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.cg.nsa.entity.DateConvert;
 import com.cg.nsa.entity.Student;
 import com.cg.nsa.exception.IdNotFoundException;
 import com.cg.nsa.exception.InvalidInstitutionException;
@@ -123,6 +124,20 @@ public class StudentController
 	}
 	
 	
+	@ApiOperation("Edit Student")
+	@PutMapping(value="/editDate/{userId}")
+	public ResponseEntity<Object> editDate(@PathVariable String userId, @RequestBody String date)
+	{
+		try
+		{
+			iStudentService.editDate(userId, date);
+			return new ResponseEntity<>("Edit Successfull",HttpStatus.OK);
+		}
+		catch(IdNotFoundException exception)
+		{
+			throw new IdNotFoundException("User Id does not exist");
+		}
+	}
 	
 	/****************************************************************************************************************
 	 * 
@@ -175,8 +190,8 @@ public class StudentController
 	 * 
 	****************************************************************************************************************/
 	@ApiOperation("Edit Institution Details")
-	@PutMapping("/editInstitutionDetails/{studentId}/{institutionName}")
-	public ResponseEntity<Object> editInstitutionDetails(@PathVariable int studentId, @PathVariable String institutionName)
+	@PutMapping("/editInstitutionDetails/{studentId}")
+	public ResponseEntity<Object> editInstitutionDetails(@PathVariable int studentId, @RequestBody String institutionName)
 	{
 		try
 		{
@@ -229,11 +244,38 @@ public class StudentController
 	 * 
 	 ****************************************************************************************************************/
 	@ApiOperation("Update Scholarship Details")
-	@PutMapping("/updateScholarshipDetails/{studentId}/{scholarshipId}")
-	public ResponseEntity<Object> updateScholarshipDetails(@PathVariable int studentId,@PathVariable int scholarshipId) 
+	@PutMapping("/updateScholarshipDetails/{studentId}")
+	public ResponseEntity<Object> updateScholarshipDetails(@PathVariable int studentId,@RequestBody int scholarshipId) 
 	{
 		iStudentService.updateScholarshipDetails(studentId, scholarshipId);
 		return new ResponseEntity<>("Updated successfully", HttpStatus.OK);
 	}
 	
+	@ApiOperation("Find By UserId")
+	@GetMapping(value="/findByUserId/{userId}")
+	public Student findByUserId(@PathVariable String userId)
+	{
+		try
+		{
+			return iStudentService.findByUserId(userId);			
+		}
+		catch(IdNotFoundException e)
+		{
+			throw new IdNotFoundException("User Id Not found");
+		}
+	}
+	
+	@ApiOperation("Find By UserId")
+	@GetMapping(value="/getDate/{userId}")
+	public DateConvert getDate(@PathVariable String userId)
+	{
+		try
+		{
+			return iStudentService.getDate(userId);			
+		}
+		catch(IdNotFoundException e)
+		{
+			throw new IdNotFoundException("User Id Not found");
+		}
+	}
 }

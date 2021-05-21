@@ -176,7 +176,7 @@ public class OfficerController
 	 *********************************************************************/
 
 	@ApiOperation(value="Grant Approval")
-	@GetMapping(value="/grantApproval/{studentId}")
+	@PostMapping(value="/grantApproval/{studentId}")
 
 	public String grant(@PathVariable int studentId) {
 		Student student =  iStudentService.findByStudentId(studentId);

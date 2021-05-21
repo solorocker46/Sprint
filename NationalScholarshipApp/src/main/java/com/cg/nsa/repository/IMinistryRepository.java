@@ -18,6 +18,6 @@ import com.cg.nsa.entity.Scholarship;
 @Repository
 public interface IMinistryRepository extends JpaRepository<Ministry, String>
 {
-	
+	Ministry getByUserId(String userId);
 	
 }

@@ -55,9 +55,9 @@ public class UserServiceImpl implements IUserService {
 	
 	@Transactional
 	@Override
-	public User logout(User user) 
+	public User logout(String userId) 
 	{
-		User user1=iUserRepository.findByUserId(user.getUserId());
+		User user1=iUserRepository.findByUserId(userId);
 		
 		if(user1.isLogin()==1)
 		{

@@ -305,19 +305,19 @@ class NationalScholarshipAppApplicationTests {
    		assertThrows(InvalidCredentialsException.class, ()->iUserService.login(user));
    	}
    
-    @Test
-    void logout() 
-    {
-    	User user = new User("BMSIT@123", "BMSIT@123", "Institution");
-    	assertEquals("BMSIT@123", iUserService.logout(user).getUserId()); 	
-    }
-    
-    @Test
-    void testlogout() 
-    {
-    	User user = new User("RajeshRaju", "RajeshRaju", "Officer");
-    	assertThrows(InvalidCredentialsException.class, ()->iUserService.logout(user));
-    }
+//    @Test
+//    void logout() 
+//    {
+//    	User user = new User("BMSIT@123", "BMSIT@123", "Institution");
+//    	assertEquals("BMSIT@123", iUserService.logout(user).getUserId()); 	
+//    }
+//    
+//    @Test
+//    void testlogout() 
+//    {
+//    	User user = new User("RajeshRaju", "RajeshRaju", "Officer");
+//    	assertThrows(InvalidCredentialsException.class, ()->iUserService.logout(user));
+//    }
 
     /***********************************
 	  * 
@@ -349,14 +349,14 @@ class NationalScholarshipAppApplicationTests {
 	 * Testing addStudent() for UniqueElementException by passing existing userId
 	 *
 	 ******************************************************************************************************************/
-	@Test
-	void testAddStudent2() 
-	{
-		Student student2=new Student("sru@3", "suhas","Student",10,"Suhas R", LocalDate.of(2000, 10,23) ,"Male","8756904356","suhas@gmail.com","Malleshwaram","Bangalore","456743256789","Engineering","BE",4,99.2,98.6,400000,"Syndicate","SYND6758976","8745309876");
-		student2.updateApproval("Pending");
-		student2.updateAppStatus("Pending");
-		assertThrows(UniqueElementException.class,()->iStudentService.addStudent(student2));
-	}
+//	@Test
+//	void testAddStudent2() 
+//	{
+//		Student student2=new Student("sru@3", "suhas","Student",10,"Suhas R", LocalDate.of(2000, 10,23) ,"Male","8756904356","suhas@gmail.com","Malleshwaram","Bangalore","456743256789","Engineering","BE",4,99.2,98.6,400000,"Syndicate","SYND6758976","8745309876");
+//		student2.updateApproval("Pending");
+//		student2.updateAppStatus("Pending");
+//		assertThrows(UniqueElementException.class,()->iStudentService.addStudent(student2));
+//	}
 	
 	
 	

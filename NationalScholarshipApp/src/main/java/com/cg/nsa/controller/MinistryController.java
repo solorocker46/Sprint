@@ -23,6 +23,7 @@ import com.cg.nsa.entity.Ministry;
 import com.cg.nsa.entity.Scholarship;
 import com.cg.nsa.entity.Student;
 import com.cg.nsa.exception.IdNotFoundException;
+import com.cg.nsa.exception.UserIdNotFoundException;
 import com.cg.nsa.exception.ValidationException;
 
 import com.cg.nsa.service.IMinistryService;
@@ -136,4 +137,14 @@ public class MinistryController
 		return new ResponseEntity<String>("Added Ministry Successfully", HttpStatus.OK);
 	}
 	
+	@GetMapping(value = "/getMinistryById/{userId}")
+	public Ministry getMinistryByUserId(@PathVariable String userId) {
+		try {
+			return iMinistryService.getMinistrybyUserId(userId);
+		}
+		
+		catch(UserIdNotFoundException e){
+			throw new UserIdNotFoundException("No Ministry with this id !");
+		}
+	}
 }

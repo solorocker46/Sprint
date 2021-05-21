@@ -32,4 +32,6 @@ public interface IInstituteService {
 	List<Institution> getAllInstitutes();
 	
 	List<Institution> getInstitutesByState(String state);
+	
+	
 }

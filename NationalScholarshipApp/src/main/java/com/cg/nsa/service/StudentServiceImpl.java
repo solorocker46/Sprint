@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.cg.nsa.entity.DateConvert;
 import com.cg.nsa.entity.Institution;
 import com.cg.nsa.entity.Student;
 import com.cg.nsa.exception.IdNotFoundException;
@@ -16,6 +17,7 @@ import com.cg.nsa.exception.UniqueElementException;
 import com.cg.nsa.repository.IInstituteRepository;
 import com.cg.nsa.repository.IScholarshipRepository;
 import com.cg.nsa.repository.IStudentRepository;
+import com.fasterxml.jackson.databind.util.JSONPObject;
 
 /************************************************************************************************************************
  * 
@@ -53,6 +55,10 @@ public class StudentServiceImpl implements IStudentService
 	{
 		if(iStudentRepository.findByStudentId(student.getStudentId())==null && iStudentRepository.findByUserId(student.getUserId())==null)
 		{
+			//DateTimeFormatter dtf = DateTimeFormatter.ofPattern("");
+			//LocalDate date = LocalDate.parse(dateString);
+			//student.setBirthdate(date);
+			System.out.println("Date = "+student.getBirthdate());
 			student.updateAppStatus("Pending");
 			student.updateApproval("Pending");
 			student.setRole("Student");
@@ -92,6 +98,8 @@ public class StudentServiceImpl implements IStudentService
 			student1.setCity(student.getCity());
 			student1.setAadhar(student.getAadhar());
 			student1.setPassword(student.getPassword());
+			student1.setBirthdate(student.getBirthdate());
+			System.out.println("Date = "+student.getBirthdate());
 			return iStudentRepository.save(student1);
 		}
 	}
@@ -200,6 +208,48 @@ public class StudentServiceImpl implements IStudentService
 	public void updateScholarshipDetails(int studentId, int scholarshipId) 
 	{
 		iStudentRepository.updateScholarshipDetails(studentId, scholarshipId);
+	}
+	
+	@Override
+	@Transactional
+	public Student findByUserId(String userId)
+	{
+		Student student=iStudentRepository.findByUserId(userId);
+		if(student==null)
+		{
+			throw new IdNotFoundException();
+		}
+		else
+		{
+			return student;
+		}
+	}
+
+
+	@Override
+	public Student editDate(String userId, String date) {
+		Student student1=iStudentRepository.findByUserId(userId);
+		if(student1==null)
+		{
+			throw new IdNotFoundException();
+		}
+		else
+		{
+			LocalDate newDate = LocalDate.parse(date);
+			student1.setBirthdate(newDate);
+			System.out.println("Date = "+newDate);
+			return iStudentRepository.save(student1);
+		}
+	}
+
+
+	@Override
+	public DateConvert getDate(String userId) {
+		Student student = iStudentRepository.findByUserId(userId);
+		String dateString = student.getBirthdate().toString();
+		DateConvert convert = new DateConvert(dateString);
+		System.out.println(convert.getDate());
+		return convert;
 	}
 
 }

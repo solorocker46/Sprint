@@ -1,10 +1,13 @@
 package com.cg.nsa.service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.cg.nsa.entity.DateConvert;
+import com.cg.nsa.entity.Institution;
 import com.cg.nsa.entity.Student;
 
 /******************************************************************************************************
@@ -35,4 +38,10 @@ public interface IStudentService
 	
 	@Transactional
 	void updateScholarshipDetails(int studentId, int scholarshipId);
+	
+	Student findByUserId(String userId);
+	
+	Student editDate(String userId, String date);
+	
+	DateConvert getDate(String userId);
 }
