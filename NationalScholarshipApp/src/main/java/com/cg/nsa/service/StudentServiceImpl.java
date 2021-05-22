@@ -55,10 +55,6 @@ public class StudentServiceImpl implements IStudentService
 	{
 		if(iStudentRepository.findByStudentId(student.getStudentId())==null && iStudentRepository.findByUserId(student.getUserId())==null)
 		{
-			//DateTimeFormatter dtf = DateTimeFormatter.ofPattern("");
-			//LocalDate date = LocalDate.parse(dateString);
-			//student.setBirthdate(date);
-			System.out.println("Date = "+student.getBirthdate());
 			student.updateAppStatus("Pending");
 			student.updateApproval("Pending");
 			student.setRole("Student");
@@ -98,8 +94,6 @@ public class StudentServiceImpl implements IStudentService
 			student1.setCity(student.getCity());
 			student1.setAadhar(student.getAadhar());
 			student1.setPassword(student.getPassword());
-			student1.setBirthdate(student.getBirthdate());
-			System.out.println("Date = "+student.getBirthdate());
 			return iStudentRepository.save(student1);
 		}
 	}
@@ -210,6 +204,16 @@ public class StudentServiceImpl implements IStudentService
 		iStudentRepository.updateScholarshipDetails(studentId, scholarshipId);
 	}
 	
+	
+	/***************************************************************************************************************
+	 * 
+	 * @author Sneha.M.J
+	 * Created date: 20-04-2021
+	 * @param userId
+	 * @return - This method retrieves and returns the student record based on the User Id.
+	 * @throws - This method can throw IdNotFoundException.
+	 * 
+	 ***************************************************************************************************************/
 	@Override
 	@Transactional
 	public Student findByUserId(String userId)
@@ -226,8 +230,19 @@ public class StudentServiceImpl implements IStudentService
 	}
 
 
+	/***************************************************************************************************************
+	 * 
+	 * @author Sushma S
+	 * Created date: 20-05-2021
+	 * @param userId
+	 * @param date
+	 * @return - This method is used to edit the date.
+	 * @throws - This method can throw IdNotFoundException.
+	 * 
+	 ***************************************************************************************************************/
 	@Override
-	public Student editDate(String userId, String date) {
+	public Student editDate(String userId, String date) 
+	{
 		Student student1=iStudentRepository.findByUserId(userId);
 		if(student1==null)
 		{
@@ -237,18 +252,25 @@ public class StudentServiceImpl implements IStudentService
 		{
 			LocalDate newDate = LocalDate.parse(date);
 			student1.setBirthdate(newDate);
-			System.out.println("Date = "+newDate);
 			return iStudentRepository.save(student1);
 		}
 	}
 
 
+	/***************************************************************************************************************
+	 * 
+	 * @author Sushma S
+	 * Created date: 20-05-2021
+	 * @param userId
+	 * @return - This method is used to convert date to a particular format.
+	 * 
+	 ***************************************************************************************************************/
 	@Override
-	public DateConvert getDate(String userId) {
+	public DateConvert getDate(String userId) 
+	{
 		Student student = iStudentRepository.findByUserId(userId);
 		String dateString = student.getBirthdate().toString();
 		DateConvert convert = new DateConvert(dateString);
-		System.out.println(convert.getDate());
 		return convert;
 	}
 

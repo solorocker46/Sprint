@@ -1,6 +1,7 @@
 package com.cg.nsa.entity;
 
-public class DateConvert {
+public class DateConvert 
+{
 	String date;
 
 	public DateConvert(String date) {
