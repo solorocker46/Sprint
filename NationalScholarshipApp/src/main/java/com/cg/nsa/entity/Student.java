@@ -33,7 +33,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 public class Student extends User 
 {
 	@Column(name = "studentId")
-	@Range(min = 1,max =2000)
+	@Range(min = 1,max =200)
 	private int studentId;
 	
 	@Column(name = "fullName")
@@ -81,7 +81,7 @@ public class Student extends User
 	private String course;		// LLB, MBA, MBBS, BE, BTech, MTech, BCA
 	
 	@Column(name = "courseYear")
-	@Range(min=1,max=5, message = "Course Year should be between 1 and 5")
+	@Range(min=1,max=4)
 	private int courseYear;		// Current course year
 	
 	@Column(name = "sscScore")

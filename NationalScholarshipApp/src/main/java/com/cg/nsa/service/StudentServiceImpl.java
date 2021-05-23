@@ -204,16 +204,6 @@ public class StudentServiceImpl implements IStudentService
 		iStudentRepository.updateScholarshipDetails(studentId, scholarshipId);
 	}
 	
-	
-	/***************************************************************************************************************
-	 * 
-	 * @author Sneha.M.J
-	 * Created date: 20-04-2021
-	 * @param userId
-	 * @return - This method retrieves and returns the student record based on the User Id.
-	 * @throws - This method can throw IdNotFoundException.
-	 * 
-	 ***************************************************************************************************************/
 	@Override
 	@Transactional
 	public Student findByUserId(String userId)
@@ -273,5 +263,6 @@ public class StudentServiceImpl implements IStudentService
 		DateConvert convert = new DateConvert(dateString);
 		return convert;
 	}
+
 
 }

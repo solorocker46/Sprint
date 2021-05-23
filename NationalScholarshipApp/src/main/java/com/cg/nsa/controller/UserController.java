@@ -67,7 +67,7 @@ public class UserController {
 			return new ResponseEntity<>("Logged in", HttpStatus.OK);
 		}
 		catch(InvalidCredentialsException e) {
-			throw new InvalidCredentialsException("Login failed");
+			throw new InvalidCredentialsException("Username or password doesn't exist");
 		}
 	}
 

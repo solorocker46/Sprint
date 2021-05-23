@@ -233,4 +233,29 @@ public class InstituteController {
 			throw new InvalidInstitutionException("Entered institution code does not exist");
 		}
 	}
+	
+	/***************************************************************************************
+	 * 
+	 * @author Sushma S
+	 * Created date: 20-04-2021
+	 * @param userId
+	 * @param password
+	 * @return this method returns a new ResponseEntity with an appropriate response code
+	 * @throws this method can throw UserIdNotFoundException
+	 * 
+	 ***************************************************************************************/
+	@ApiOperation("Edit password")
+	@PutMapping("/editPassword/{userId}")
+	public ResponseEntity<Object> editPassword(@PathVariable String userId, @RequestBody String password)
+	{
+		try
+		{
+			iInstituteService.editPassword(userId, password);
+			return new ResponseEntity<>("Updated password", HttpStatus.OK);
+		}
+		catch(UserIdNotFoundException userIdNotFoundException)
+		{
+			throw new UserIdNotFoundException("Entered User Id does not exist");
+		}
+	}
 }

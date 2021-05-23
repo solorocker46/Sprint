@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.cg.nsa.entity.Institution;
+import com.cg.nsa.exception.InvalidCredentialsException;
 import com.cg.nsa.exception.InvalidInstitutionException;
 import com.cg.nsa.exception.StateNotFoundException;
 import com.cg.nsa.exception.UniqueElementException;
@@ -79,6 +80,7 @@ public class InstituteServiceImpl implements IInstituteService {
 			institution.setTelephone(institute.getTelephone());
 			institution.setPrincipal(institute.getPrincipal());
 			institution.setCategory(institute.getCategory());
+			institution.setPassword(institute.getPassword());
 			return iInstituteRepository.save(institution);
 		}
 	}
@@ -195,5 +197,33 @@ public class InstituteServiceImpl implements IInstituteService {
 			return institute;
 		}
 	}
+
+	/*********************************************************************************************
+	 * 
+	 * @author Sushma S
+	 * Created date: 22-05-2021
+	 * @return this method finds an institution by its userId and updates the password 
+	 * @param this method takes in institution userId of type string as a parameter
+	 * @param this method takes in institution password of type string as a parameter
+	 * @throws this method can throw a UserIdNotFoundException
+	 * 
+	 **********************************************************************************************/
+	
+	@Override
+	@Transactional
+	public Institution editPassword(String userId, String password) {
+		Institution institution = iInstituteRepository.findByUserId(userId);
+		if(institution == null)
+		{
+			throw new UserIdNotFoundException();
+		}
+		else
+		{
+			institution.setPassword(password);
+			return iInstituteRepository.save(institution);
+		}
+	}
+	
+	
 
 }

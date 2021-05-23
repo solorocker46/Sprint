@@ -33,5 +33,7 @@ public interface IInstituteService {
 	
 	List<Institution> getInstitutesByState(String state);
 	
+	Institution editPassword(String userId, String password);
+	
 	
 }
