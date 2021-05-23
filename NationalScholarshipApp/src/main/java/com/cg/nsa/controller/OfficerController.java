@@ -218,5 +218,18 @@ public class OfficerController
    		}
    	}
 	
-	
+	@ApiOperation("Edit Officer password")
+	@PutMapping("/editOfficerPassword/{userId}")
+	public ResponseEntity<Object> editOfficerPassword(@PathVariable String userId, @RequestBody String password)
+	{
+		try
+		{
+			iOfficerService.editOfficerPassword(userId, password);
+			return new ResponseEntity<>("Updated password", HttpStatus.OK);
+		}
+		catch(UserIdNotFoundException userIdNotFoundException)
+		{
+			throw new UserIdNotFoundException("Entered User Id does not exist");
+		}
+	}
 }

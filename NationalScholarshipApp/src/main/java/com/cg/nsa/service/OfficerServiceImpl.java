@@ -186,5 +186,21 @@ public class OfficerServiceImpl implements IOfficerService{
 		    throw new UserIdNotFoundException();
         }		 
 	}
+	
+	@Override
+	@Transactional
+	public Officer editOfficerPassword(String userId, String password) {
+		Officer officer = iOfficerRepository.findByUserId(userId);
+		if(officer == null)
+		{
+			throw new UserIdNotFoundException();
+		}
+		else
+		{
+			officer.setPassword(password);
+			return iOfficerRepository.save(officer);
+		}
+	}
+	
 
 }

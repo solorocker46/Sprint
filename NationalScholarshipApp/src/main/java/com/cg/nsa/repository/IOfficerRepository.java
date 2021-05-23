@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import com.cg.nsa.entity.Institution;
 import com.cg.nsa.entity.Officer;
 
 /*********************************************************************
@@ -19,6 +20,7 @@ import com.cg.nsa.entity.Officer;
 @Repository
 public interface IOfficerRepository extends JpaRepository<Officer, String> 
 {
+	Officer findByUserId(String userId);
 	
 	List<Officer> getOfficerByState(String state);
 	

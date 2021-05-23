@@ -34,4 +34,6 @@ public interface IOfficerService {
 	Institution statusUpdate(int code, String status);
 	
 	Officer getOfficerByUserId(String userId);
+	
+	Officer editOfficerPassword(String userId, String password);
 }
