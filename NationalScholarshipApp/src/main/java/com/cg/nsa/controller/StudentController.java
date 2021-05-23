@@ -24,6 +24,7 @@ import com.cg.nsa.entity.Student;
 import com.cg.nsa.exception.IdNotFoundException;
 import com.cg.nsa.exception.InvalidInstitutionException;
 import com.cg.nsa.exception.UniqueElementException;
+import com.cg.nsa.exception.UserIdNotFoundException;
 import com.cg.nsa.exception.ValidationException;
 import com.cg.nsa.service.IStudentService;
 
@@ -58,8 +59,7 @@ public class StudentController
 	 * @return - This method inserts a new Student record and returns the response accordingly.
 	 * @throws - This method can throw ValidationException and UniqueElementException.
 	 * 
-	 ****************************************************************************************************************/
-	
+	 ****************************************************************************************************************/	
 	@ApiOperation("Add New Student")
 	@PostMapping(value="/addStudent")
 	public ResponseEntity<String> addStudent(@Valid @RequestBody Student student,BindingResult bindingResult)
@@ -122,6 +122,34 @@ public class StudentController
 			throw new IdNotFoundException("User Id does not exist");
 		}
 	}
+	
+	
+	
+	/***************************************************************************************************************
+	 * 
+	 * @author Sushma S
+	 * Created date: 20-05-2021
+	 * @param userId
+	 * @param date
+	 * @return - This method is used to edit the date.
+	 * @throws - This method can throw IdNotFoundException.
+	 * 
+	 ***************************************************************************************************************/
+	@ApiOperation("Edit Date")
+	@PutMapping(value="/editDate/{userId}")
+	public ResponseEntity<Object> editDate(@PathVariable String userId, @RequestBody String date)
+	{
+		try
+		{
+			iStudentService.editDate(userId, date);
+			return new ResponseEntity<>("Edit Successfull",HttpStatus.OK);
+		}
+		catch(IdNotFoundException exception)
+		{
+			throw new IdNotFoundException("User Id does not exist");
+		}
+	}
+	
 	
 	
 	/****************************************************************************************************************
@@ -238,6 +266,15 @@ public class StudentController
 	
 	
 	
+	/****************************************************************************************************************
+	 * 
+	 * @author Sneha.M.J 
+	 * Created date: 20-04-2021
+	 * @param userId
+	 * @return - This method retrieves and returns the student record based on the User Id.
+	 * @throws - This method can throw IdNotFoundException.
+	 * 
+	 ****************************************************************************************************************/
 	@ApiOperation("Find By UserId")
 	@GetMapping(value="/findByUserId/{userId}")
 	public Student findByUserId(@PathVariable String userId)
@@ -252,30 +289,7 @@ public class StudentController
 		}
 	}
 	
-	/***************************************************************************************************************
-	 * 
-	 * @author Sushma S
-	 * Created date: 20-05-2021
-	 * @param userId
-	 * @param date
-	 * @return - This method is used to edit the date.
-	 * @throws - This method can throw IdNotFoundException.
-	 * 
-	 ***************************************************************************************************************/
-	@ApiOperation("Edit Student")
-	@PutMapping(value="/editDate/{userId}")
-	public ResponseEntity<Object> editDate(@PathVariable String userId, @RequestBody String date)
-	{
-		try
-		{
-			iStudentService.editDate(userId, date);
-			return new ResponseEntity<>("Edit Successfull",HttpStatus.OK);
-		}
-		catch(IdNotFoundException exception)
-		{
-			throw new IdNotFoundException("User Id does not exist");
-		}
-	}
+	
 	
 	/***************************************************************************************************************
 	 * 
@@ -285,14 +299,40 @@ public class StudentController
 	 * @return - This method is used to convert date to a particular format.
 	 * 
 	 ***************************************************************************************************************/
-	
-	@ApiOperation("Find By UserId")
+	@ApiOperation("Get Date")
 	@GetMapping(value="/getDate/{userId}")
 	public DateConvert getDate(@PathVariable String userId)
 	{
 		try
 		{
 			return iStudentService.getDate(userId);			
+		}
+		catch(IdNotFoundException e)
+		{
+			throw new IdNotFoundException("User Id Not found");
+		}
+	}
+	
+	
+	
+	/***************************************************************************************
+	 * 
+	 * @author Sneha.M.J 
+	 * Created date: 23-05-2021
+	 * @param userId
+	 * @param password
+	 * @return this method returns a new ResponseEntity with an appropriate response code
+	 * @throws this method can throw IdNotFoundException
+	 * 
+	 ***************************************************************************************/
+	@ApiOperation("Edit Student password")
+	@PutMapping("/editStudentPassword/{userId}")
+	public ResponseEntity<Object> editStudentPassword(@PathVariable String userId, @RequestBody String password)
+	{
+		try
+		{
+			iStudentService.editStudentPassword(userId, password);
+			return new ResponseEntity<>("Updated password", HttpStatus.OK);
 		}
 		catch(IdNotFoundException e)
 		{

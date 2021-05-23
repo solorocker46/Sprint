@@ -44,4 +44,6 @@ public interface IStudentService
 	Student editDate(String userId, String date);
 	
 	DateConvert getDate(String userId);
+	
+	Student editStudentPassword(String userId, String password);
 }

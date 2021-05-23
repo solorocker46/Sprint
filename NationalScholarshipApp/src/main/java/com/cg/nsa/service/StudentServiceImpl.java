@@ -14,6 +14,7 @@ import com.cg.nsa.entity.Student;
 import com.cg.nsa.exception.IdNotFoundException;
 import com.cg.nsa.exception.InvalidInstitutionException;
 import com.cg.nsa.exception.UniqueElementException;
+import com.cg.nsa.exception.UserIdNotFoundException;
 import com.cg.nsa.repository.IInstituteRepository;
 import com.cg.nsa.repository.IScholarshipRepository;
 import com.cg.nsa.repository.IStudentRepository;
@@ -88,12 +89,16 @@ public class StudentServiceImpl implements IStudentService
 		}
 		else
 		{
+			student1.setPassword(student.getPassword());
 			student1.setMobile(student.getMobile());
 			student1.setEmail(student.getEmail());
 			student1.setAddress(student.getAddress());
 			student1.setCity(student.getCity());
 			student1.setAadhar(student.getAadhar());
-			student1.setPassword(student.getPassword());
+			student1.setFamilyIncome(student.getFamilyIncome());
+			student1.setBankName(student.getBankName());
+			student1.setBankIfsc(student.getBankIfsc());
+			student1.setAccountNo(student.getAccountNo());
 			return iStudentRepository.save(student1);
 		}
 	}
@@ -204,6 +209,16 @@ public class StudentServiceImpl implements IStudentService
 		iStudentRepository.updateScholarshipDetails(studentId, scholarshipId);
 	}
 	
+	
+	/***************************************************************************************************************
+	 * 
+	 * @author Sneha.M.J
+	 * Created date: 20-04-2021
+	 * @param userId
+	 * @return - This method retrieves and returns the student record based on the User Id.
+	 * @throws - This method can throw IdNotFoundException.
+	 * 
+	 ***************************************************************************************************************/
 	@Override
 	@Transactional
 	public Student findByUserId(String userId)
@@ -263,6 +278,32 @@ public class StudentServiceImpl implements IStudentService
 		DateConvert convert = new DateConvert(dateString);
 		return convert;
 	}
-
+	
+	
+	/*********************************************************************************************
+	 * 
+	 * @author Sneha.M.J
+	 * Created date: 23-05-2021
+	 * @param userId 
+	 * @param password 
+	 * @return this method finds a student by its userId and updates the password 
+	 * @throws this method can throw a IdNotFoundException();
+	 * 
+	 **********************************************************************************************/	
+	@Override
+	@Transactional
+	public Student editStudentPassword(String userId, String password) 
+	{
+		Student student = iStudentRepository.findByUserId(userId);
+		if(student == null)
+		{
+			throw new IdNotFoundException();
+		}
+		else
+		{
+			student.setPassword(password);
+			return iStudentRepository.save(student);
+		}
+	}
 
 }

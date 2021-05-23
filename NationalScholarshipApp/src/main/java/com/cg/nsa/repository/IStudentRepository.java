@@ -23,13 +23,12 @@ import com.cg.nsa.entity.Student;
 @Repository
 public interface IStudentRepository extends JpaRepository<Student, String>
 {	
-Student findByUserId(String userId);
+    Student findByUserId(String userId);
 	
 	Student findByStudentId(int studentId);
 	
 	List<Student> findByInstitutionUserId(String userId);
-	
-	
+		
 	@Query(value="update student10 s set s.scholarship_id=:scholarshipId where s.student_id=:studentId", nativeQuery = true)
 	@Modifying
 	void updateScholarshipDetails(@Param("studentId")int studentId,@Param("scholarshipId")int scholarshipId);
